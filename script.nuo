@@ -1,0 +1,69 @@
+import Math
+import Time
+
+
+
+Class Data 
+{
+	
+	_init(proc)
+	{
+		this.time = Signal()
+		this.time.connect(proc)
+		this.seed = Math.randi()%1_000_000
+	}
+	
+	_fibonacci (n)
+	{
+		if n <= 1 {return 1}
+		return this._fibonacci(n-1)+this._fibonacci(n-2)
+	}
+	
+	_count()
+	{
+		set sum = 0.0
+		
+		for i in (0..this.seed).step(1)
+		{
+			sum += Math.cos(i)+Math.sin(Math.tan(i))
+			if Math.randi()%100 == i
+			{
+				this.time.emit(i)
+			}
+		}
+		
+		Nuo.print("Sum: ",sum,"\nSeed: ",this.seed)
+		
+		
+	
+	}
+}
+
+
+
+fn factorial(n)
+{
+	if n <= 1 { return 1}
+	Nuo.print("Factorial called ",n)
+	return factorial(n-1)
+}
+
+
+fn main()
+{
+	set start = Time.get_tick_ms()
+	set data  = Data.new(factorial)
+	
+	data._count()
+	
+	Nuo.print((Time.get_tick_ms()-start)*0.001)
+	
+	
+ 
+
+}
+
+
+
+
+
